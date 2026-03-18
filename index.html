@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>活动群运营助手</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部导航 -->
+        <header class="header">
+            <div class="header-decoration">
+                <div class="orbit-circle orbit-1"></div>
+                <div class="orbit-circle orbit-2"></div>
+                <div class="orbit-line"></div>
+            </div>
+            
+            <div class="header-content">
+                <div class="header-tags">
+                    <span class="tag">通知生成</span>
+                    <span class="tag">数据统计</span>
+                    <span class="tag">活动相册</span>
+                    <span class="tag">总结邮件</span>
+                </div>
+                
+                <h1 class="banner-title">
+                    <span class="glass-text">A</span>
+                    <span class="glass-text">C</span>
+                    <span class="glass-text">T</span>
+                    <span class="glass-text">I</span>
+                    <span class="glass-text">V</span>
+                    <span class="glass-text">I</span>
+                    <span class="glass-text">T</span>
+                    <span class="glass-text">Y</span>
+                </h1>
+                
+                <div class="header-badge">
+                    <div class="badge-circle">
+                        <span>运营</span>
+                        <span>助手</span>
+                    </div>
+                </div>
+                
+                <p class="subtitle">一站式活动管理平台</p>
+            </div>
+        </header>
+
+        <!-- 导航标签 -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="notice">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="7" x2="16" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="8" y1="11" x2="16" y2="11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="8" y1="15" x2="13" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                通知生成
+            </button>
+            <button class="tab-btn" data-tab="stats">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="14" width="4" height="8" rx="1" fill="currentColor"/>
+                    <rect x="10" y="8" width="4" height="14" rx="1" fill="currentColor"/>
+                    <rect x="17" y="4" width="4" height="18" rx="1" fill="currentColor"/>
+                </svg>
+                参与情况
+            </button>
+            <button class="tab-btn" data-tab="album">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="8.5" cy="10.5" r="2" fill="currentColor"/>
+                    <path d="M3 17L8 12L12 16L16 12L21 17V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V17Z" fill="currentColor"/>
+                </svg>
+                活动相册
+            </button>
+            <button class="tab-btn" data-tab="review">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8L10.89 13.26C11.5617 13.6967 12.4383 13.6967 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                复盘邮件
+            </button>
+        </nav>
+
+        <!-- 通知生成模块 -->
+        <section id="notice" class="tab-content active">
+            <div class="card">
+                <h2>活动通知生成器</h2>
+                <form id="noticeForm">
+                    <div class="form-group">
+                        <label for="activityName">活动项目名称</label>
+                        <input type="text" id="activityName" placeholder="例如: 春季团建活动" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="activityStartDate">开始时间</label>
+                            <input type="datetime-local" id="activityStartDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="activityEndDate">结束时间</label>
+                            <input type="datetime-local" id="activityEndDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="activityLocation">活动地点</label>
+                        <input type="text" id="activityLocation" placeholder="例如: 市民公园东门" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="activityRoute">活动路线</label>
+                        <textarea id="activityRoute" rows="2" placeholder="例如: 地铁3号线至市民公园站,A出口步行5分钟" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="activityNotes">文案要点提示(可选)</label>
+                        <textarea id="activityNotes" rows="3" placeholder="输入您希望在通知中强调的要点,例如: 需要带泳衣、自带午餐、雨天改期等,系统会帮您完善成完整文案"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">✨ 生成通知文案</button>
+                </form>
+
+                <div id="noticeResult" class="result-box" style="display:none;">
+                    <div class="result-header">
+                        <h3>📋 生成的通知文案</h3>
+                        <button id="copyNotice" class="btn btn-small">复制文案</button>
+                    </div>
+                    <div id="noticeText" class="notice-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 参与情况模块 -->
+        <section id="stats" class="tab-content">
+            <div class="card">
+                <h2>活动参与情况</h2>
+                <div class="stats-input">
+                    <div class="form-group">
+                        <label>快速录入参与数据</label>
+                        <div class="input-row">
+                            <input type="number" id="confirmedCount" placeholder="已确认人数" min="0" value="25">
+                            <input type="number" id="pendingCount" placeholder="待确认人数" min="0" value="8">
+                            <input type="number" id="declinedCount" placeholder="无法参加人数" min="0" value="5">
+                            <button id="updateStats" class="btn btn-primary">更新数据</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <h3>参与状态分布</h3>
+                        <canvas id="participationChart"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <h3>参与趋势</h3>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="stats-summary">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalInvited">38</div>
+                        <div class="stat-label">总邀请人数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="confirmRate">65.8%</div>
+                        <div class="stat-label">确认率</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="responseRate">86.8%</div>
+                        <div class="stat-label">响应率</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 活动相册模块 -->
+        <section id="album" class="tab-content">
+            <div class="card">
+                <h2>活动相册</h2>
+                <div class="upload-area">
+                    <input type="file" id="photoUpload" accept="image/*" multiple style="display:none;">
+                    <button id="uploadBtn" class="btn btn-primary">📸 上传照片</button>
+                    <p class="upload-hint">支持批量上传,支持 JPG、PNG 格式</p>
+                </div>
+
+                <div id="photoGallery" class="photo-gallery">
+                    <!-- 示例照片 -->
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>📷</span>
+                            <p>示例照片1</p>
+                        </div>
+                        <div class="photo-info">
+                            <span class="photo-date">2026-03-15</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>📷</span>
+                            <p>示例照片2</p>
+                        </div>
+                        <div class="photo-info">
+                            <span class="photo-date">2026-03-15</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>📷</span>
+                            <p>示例照片3</p>
+                        </div>
+                        <div class="photo-info">
+                            <span class="photo-date">2026-03-15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 复盘邮件模块 -->
+        <section id="review" class="tab-content">
+            <div class="card">
+                <h2>活动复盘邮件生成</h2>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewActivityName">活动名称</label>
+                        <input type="text" id="reviewActivityName" placeholder="自动获取或手动输入">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="actualParticipants">实际参与人数</label>
+                            <input type="number" id="actualParticipants" min="0" value="23">
+                        </div>
+                        <div class="form-group">
+                            <label for="photoCount">照片数量</label>
+                            <input type="number" id="photoCount" min="0" value="45">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="highlights">活动亮点</label>
+                        <textarea id="highlights" rows="3" placeholder="例如: 团队协作游戏获得一致好评、天气晴朗、参与度高"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="improvements">改进建议</label>
+                        <textarea id="improvements" rows="3" placeholder="例如: 建议提前确认天气、准备更多备用活动方案"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">活动预算/花费</label>
+                        <input type="text" id="budget" placeholder="例如: 预算5000元,实际花费4800元">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">📧 生成复盘邮件</button>
+                </form>
+
+                <div id="reviewResult" class="result-box" style="display:none;">
+                    <div class="result-header">
+                        <h3>📧 复盘邮件内容</h3>
+                        <button id="copyReview" class="btn btn-small">复制邮件</button>
+                    </div>
+                    <div id="reviewText" class="review-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 底部 -->
+        <footer class="footer">
+            <p>💡 提示: 所有数据均保存在本地浏览器,请及时复制保存重要内容</p>
+        </footer>
+    </div>
+
+    <!-- 图片预览模态框 -->
+    <div id="photoModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
